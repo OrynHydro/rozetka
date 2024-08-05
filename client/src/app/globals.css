@@ -30,17 +30,3 @@ button {
   border: none;
   outline: none;
 }
-
-main {
-  display: flex;
-}
-
-.test {
-  display: flex;
-  padding: 40px 0 0 40px;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-}

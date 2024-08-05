@@ -1,35 +1,5 @@
-import CategorySidebar from '@/components/layout/CategorySidebar/CategorySidebar'
-import Item from '@/components/ui/Item/Item'
+import HomePage from '@/components/screens/Home/Home'
 
 export default function Home() {
-	return (
-		<div className='wrapper'>
-			<main>
-				<CategorySidebar />
-				<div className='main'>
-					<div className='test'>
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-					</div>
-					<div className='test'>
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-					</div>
-					<div className='test'>
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-					</div>
-				</div>
-			</main>
-		</div>
-	)
+	return <HomePage />
 }

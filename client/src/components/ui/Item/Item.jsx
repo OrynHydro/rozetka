@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Item = () => {
 	return (
-		<Link href={'/item'} className={s.item}>
+		<Link href={'/item/228'} className={s.item}>
 			<div className={s.heart}>
 				<FaRegHeart color='#FFA900' strokeWidth={2} fontSize={24} />
 			</div>

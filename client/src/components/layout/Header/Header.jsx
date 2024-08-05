@@ -6,6 +6,7 @@ import { FaRegListAlt } from 'react-icons/fa'
 import { FaRegBell } from 'react-icons/fa'
 import { LuShoppingCart } from 'react-icons/lu'
 import { CiSearch } from 'react-icons/ci'
+import Link from 'next/link'
 
 const Header = () => {
 	return (
@@ -16,7 +17,9 @@ const Header = () => {
 						<RxHamburgerMenu color='#fff' fontSize={24} strokeWidth={0.75} />
 					</div>
 
-					<Image src={'/logo/logo.svg'} width={240} height={40} alt='' />
+					<Link href={'/'}>
+						<Image src={'/logo/logo.svg'} width={240} height={40} alt='' />
+					</Link>
 
 					<div className={s.catalogue}>
 						<HiOutlineSquares2X2 color='#fff' fontSize={24} strokeWidth={2} />{' '}
