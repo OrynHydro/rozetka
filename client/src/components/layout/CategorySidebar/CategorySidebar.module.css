@@ -1,0 +1,27 @@
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 233px;
+	padding: 16px;
+	border-right: 1px solid #e9e9e9;
+	border-bottom: 1px solid #e9e9e9;
+}
+
+.item {
+	display: flex;
+	gap: 7.5px;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 400;
+	color: #4c6e91;
+	cursor: pointer;
+	width: 178px;
+}
+
+.item:hover .title {
+	color: red;
+	text-decoration: underline;
+}
