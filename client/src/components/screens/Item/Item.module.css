@@ -96,7 +96,11 @@
 }
 
 .star {
-	color: #fab101;
+	color: gray;
+}
+
+.star.active {
+	color: gold;
 }
 
 .code {

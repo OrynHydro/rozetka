@@ -12,6 +12,8 @@ const HomePage = () => {
 	const [user, setUser] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const router = useRouter()
+	const [goods, setGoods] = useState([])
+	const [goodsLoading, setGoodsLoading] = useState(true)
 
 	const fetchUser = async () => {
 		try {
@@ -30,6 +32,22 @@ const HomePage = () => {
 		}
 	}, [user, isLoading])
 
+	useEffect(() => {
+		const fetchGoods = async () => {
+			try {
+				const res = await axios.get('/api/goods')
+				setGoods(res.data)
+				setGoodsLoading(false)
+			} catch (err) {
+				console.log(err)
+				setGoodsLoading(false)
+			}
+		}
+		if (user) {
+			fetchGoods()
+		}
+	}, [user])
+
 	if (
 		isLoading ||
 		(!user &&
@@ -39,9 +57,16 @@ const HomePage = () => {
 	) {
 		return <Loader />
 	}
+
 	return (
 		<div className={s.page}>
-			<Item />
+			{goodsLoading ? (
+				<div>Loading...</div>
+			) : !goodsLoading && goods.length === 0 ? (
+				<div>No goods</div>
+			) : (
+				goods.map((good, index) => <Item key={index} item={good} />)
+			)}
 		</div>
 	)
 }

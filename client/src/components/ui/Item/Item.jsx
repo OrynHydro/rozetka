@@ -1,25 +1,28 @@
+'use client'
 import Image from 'next/image'
 import s from './Item.module.css'
 import { FaRegHeart } from 'react-icons/fa'
 import Link from 'next/link'
 
-const Item = () => {
+const Item = ({ item }) => {
+	const PF = process.env.NEXT_PUBLIC_API_URL
+	const itemData = encodeURIComponent(JSON.stringify(item))
 	return (
-		<Link href={'/item/228'} className={s.item}>
+		<Link href={`/item/${item._id}?data=${itemData}`} className={s.item}>
 			<div className={s.heart}>
 				<FaRegHeart color='#FFA900' strokeWidth={2} fontSize={24} />
 			</div>
 			<div className={s.main}>
 				<Image
 					className={s.img}
-					src={'/images/410768842.webp'}
+					src={`${PF}/img/${item.photo}`}
 					width={140}
 					height={105}
 					alt=''
 				/>
-				<p className={s.title}>Ноутбук ASUS TUF Gaming A15 FA506NC-</p>
+				<p className={s.title}>{item.title}</p>
 			</div>
-			<span className={s.price}>36 999₴</span>
+			<span className={s.price}>{item.price}₴</span>
 		</Link>
 	)
 }

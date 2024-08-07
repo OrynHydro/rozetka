@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import s from './Item.module.css'
 import { IoMdHome } from 'react-icons/io'
@@ -11,14 +12,46 @@ import { FiTruck } from 'react-icons/fi'
 import { CiShop } from 'react-icons/ci'
 import { IoWalletOutline } from 'react-icons/io5'
 import { GoShieldCheck } from 'react-icons/go'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import Loader from '@/components/ui/Loader/Loader'
+import axios from 'axios'
+import { categoryData } from '@/data/category.data'
 
 const Item = () => {
+	const searchParams = useSearchParams()
+	const data = searchParams.get('data')
+	const [item, setItem] = useState(null)
+	const pathname = usePathname()
+
+	const fetchItem = async () => {
+		try {
+			const res = await axios.get(`/api/goods/${pathname.split('/')[2]}`)
+			setItem(res.data)
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	useEffect(() => {
+		if (data) {
+			setItem(JSON.parse(decodeURIComponent(data)))
+		} else {
+			fetchItem()
+		}
+	}, [data])
+
+	if (!item) {
+		return <Loader />
+	}
+
+	const PF = process.env.NEXT_PUBLIC_API_URL
 	return (
 		<div className={s.container}>
 			<span className={s.breadcrumbs}>
-				<IoMdHome className={s.img} /> / <span>Побутова техніка, інтер'єр</span>{' '}
-				/ <span>Кліматична техніка</span> / <span>Вентилятори</span> /
-				<span>Вентилятори Saturn</span>
+				<IoMdHome className={s.img} /> /{' '}
+				{categoryData.find(c => c.id === item.category).title}
 			</span>
 			<div className={s.menu}>
 				<div className={`${s.item} ${s.active}`}>Усе про товар</div>
@@ -30,7 +63,7 @@ const Item = () => {
 				<div className={s.imgBlock}>
 					<BiChevronLeftCircle fontSize={40} />
 					<Image
-						src={'/images/453099816.webp'}
+						src={`${PF}img/${item.photo}`}
 						alt=''
 						width={410}
 						height={630}
@@ -38,32 +71,28 @@ const Item = () => {
 					<BiChevronRightCircle fontSize={40} />
 				</div>
 				<div className={s.textBlock}>
-					<h1 className={s.title}>Вентилятор настільний SATURN-ST-FN8288</h1>
+					<h1 className={s.title}>{item.title}</h1>
 					<div className={s.data}>
 						<div className={s.starRating}>
-							<span className={s.star} data-value='1'>
-								&#9733;
-							</span>
-							<span className={s.star} data-value='2'>
-								&#9733;
-							</span>
-							<span className={s.star} data-value='3'>
-								&#9733;
-							</span>
-							<span className={s.star} data-value='4'>
-								&#9733;
-							</span>
-							<span className={s.star} data-value='5'>
-								&#9733;
-							</span>
+							{[1, 2, 3, 4, 5].map(value => (
+								<span
+									key={value}
+									className={`${s.star} ${
+										value <= item.rating ? s.active : ''
+									}`}
+									data-value={value}
+								>
+									&#9733;
+								</span>
+							))}
 						</div>
-						<span className={s.code}>Код: 441431840</span>
+						<span className={s.code}>Код: {item.code}</span>
 					</div>
 					<div className={s.block}>
 						<div className={s.flex}>
 							<div className={s.price}>
 								<p className={s.availability}>Є в наявності</p>
-								<h4 className={s.cost}>899₴</h4>
+								<h4 className={s.cost}>{item.price}₴</h4>
 							</div>
 							<button className={`${s.button} ${s.green}`}>
 								<FiShoppingCart color='#fff' fontSize={24} />
@@ -91,7 +120,7 @@ const Item = () => {
 							<div className={s.orderBlock}>
 								<div className={s.left}>
 									<Image
-										src={'/logo/logoNoText.png'}
+										src={`${PF}logo/logoNoText.png`}
 										width={24}
 										height={24}
 										alt=''

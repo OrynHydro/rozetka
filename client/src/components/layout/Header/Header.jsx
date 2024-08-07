@@ -9,6 +9,7 @@ import { CiSearch } from 'react-icons/ci'
 import Link from 'next/link'
 
 const Header = () => {
+	const PF = process.env.NEXT_PUBLIC_API_URL
 	return (
 		<header className={s.header}>
 			<div className='wrapper'>
@@ -18,7 +19,7 @@ const Header = () => {
 					</div>
 
 					<Link href={'/'}>
-						<Image src={'/logo/logo.svg'} width={240} height={40} alt='' />
+						<Image src={`${PF}logo/logo.svg`} width={240} height={40} alt='' />
 					</Link>
 
 					<div className={s.catalogue}>
