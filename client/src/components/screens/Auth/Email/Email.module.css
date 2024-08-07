@@ -124,3 +124,8 @@
 .eye:hover {
 	color: #FF8888;
 }
+
+.error {
+	color: #FF8888;
+	font-size: 12px;
+}

@@ -5,7 +5,7 @@ const CategorySidebar = () => {
 	return (
 		<div className={s.sidebar}>
 			{categoryData.map(item => (
-				<span className={s.item}>
+				<span className={s.item} key={item.id}>
 					{item?.icon && item.icon}
 					<p className={s.title}>{item.title}</p>
 				</span>

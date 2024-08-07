@@ -1,9 +1,10 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import Link from 'next/link'
 import s from './Register.module.css' // Импортируйте ваши стили
+import { useRouter } from 'next/navigation'
 
 const Register = () => {
 	const [isHashed, setIsHashed] = useState(true)
@@ -25,6 +26,8 @@ const Register = () => {
 		}
 	}
 
+	const router = useRouter()
+
 	const handleSubmit = async e => {
 		e.preventDefault()
 
@@ -45,13 +48,13 @@ const Register = () => {
 			setServerError('')
 
 			try {
-				const response = await axios.post('/api/users/register', {
-					phone: inputType === 'phone' ? inputValue : null,
-					email: inputType === 'email' ? inputValue : null,
-					password: passwordValue,
-				})
-
-				console.log(response.data)
+				await axios
+					.post('/api/users/register', {
+						phone: inputType === 'phone' ? inputValue : null,
+						email: inputType === 'email' ? inputValue : null,
+						password: passwordValue,
+					})
+					.then(() => router.push('/'))
 			} catch (err) {
 				console.error(err)
 				setServerError('Помилка на сервері, спробуйте пізніше')
@@ -59,16 +62,12 @@ const Register = () => {
 		}
 	}
 
-	const cookie = document.cookie
-	console.log(cookie)
-
 	return (
 		<div className={s.container}>
 			<form className={s.form} onSubmit={handleSubmit}>
 				<div className={s.top}>
 					<h2>Створити акаунт</h2>
 				</div>
-				<div>fergtyhe</div>
 				<div className={s.main}>
 					<label className={s.label} htmlFor='phone'>
 						Телефон або ел. пошта
@@ -79,6 +78,7 @@ const Register = () => {
 						type='text'
 						value={inputValue}
 						onChange={e => setInputValue(e.target.value)}
+						required
 					/>
 					{errors.input && <div className={s.error}>{errors.input}</div>}
 					<label className={`${s.label} ${s.mt}`} htmlFor='password'>

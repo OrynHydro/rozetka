@@ -41,6 +41,13 @@
 	color: #797878;
 }
 
+.inputBlock {
+	width: 392px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
 .input {
 	padding: 12px;
 	width: 392px;
@@ -98,4 +105,23 @@
 
 .link:hover {
 	color: #FF8888;
+}
+
+.eye {
+	color: #3f688a;
+	cursor: pointer;
+	transition: 0.2s ease;
+}
+
+.eye:hover {
+	color: #FF8888;
+}
+
+.mt {
+	margin-top: 15px;
+}
+
+.error {
+	color: #FF8888;
+	font-size: 12px;
 }
