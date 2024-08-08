@@ -18,6 +18,7 @@ import { usePathname } from 'next/navigation'
 import Loader from '@/components/ui/Loader/Loader'
 import axios from 'axios'
 import { categoryData } from '@/data/category.data'
+import Link from 'next/link'
 
 const Item = () => {
 	const searchParams = useSearchParams()
@@ -50,7 +51,9 @@ const Item = () => {
 	return (
 		<div className={s.container}>
 			<span className={s.breadcrumbs}>
-				<IoMdHome className={s.img} /> /{' '}
+				<Link href={'/'}>
+					<IoMdHome className={s.img} /> /{' '}
+				</Link>
 				{categoryData.find(c => c.id === item.category).title}
 			</span>
 			<div className={s.menu}>
@@ -62,12 +65,7 @@ const Item = () => {
 			<div className={s.content}>
 				<div className={s.imgBlock}>
 					<BiChevronLeftCircle fontSize={40} />
-					<Image
-						src={`${PF}img/${item.photo}`}
-						alt=''
-						width={410}
-						height={630}
-					/>
+					<img src={`${PF}img/${item.photo}`} alt='' />
 					<BiChevronRightCircle fontSize={40} />
 				</div>
 				<div className={s.textBlock}>
@@ -91,7 +89,15 @@ const Item = () => {
 					<div className={s.block}>
 						<div className={s.flex}>
 							<div className={s.price}>
-								<p className={s.availability}>Є в наявності</p>
+								<p
+									className={
+										item.availability
+											? s.availability
+											: `${s.availability} ${s.red}`
+									}
+								>
+									{item.availability ? 'В наявності' : 'Немає в наявності'}
+								</p>
 								<h4 className={s.cost}>{item.price}₴</h4>
 							</div>
 							<button className={`${s.button} ${s.green}`}>

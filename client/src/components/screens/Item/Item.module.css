@@ -70,6 +70,11 @@
 	padding: 0px 32px;
 }
 
+.imgBlock img {
+	max-width: 612px;
+	max-height: 612px;
+}
+
 .textBlock {
 	display: flex;
 	flex-direction: column;
@@ -90,7 +95,6 @@
 }
 
 .starRating {
-	direction: rtl;
 	unicode-bidi: bidi-override;
 	font-size: 20px;
 }
@@ -133,6 +137,10 @@
 .availability {
 	color: #00a046;
 	font-size: 14px;
+}
+
+.availability.red {
+	color: #e20b12;
 }
 
 .cost {

@@ -16,13 +16,13 @@ const Item = ({ item }) => {
 				<Image
 					className={s.img}
 					src={`${PF}/img/${item.photo}`}
-					width={140}
-					height={105}
+					width={190}
+					height={140}
 					alt=''
 				/>
 				<p className={s.title}>{item.title}</p>
+				<span className={s.price}>{item.price}₴</span>
 			</div>
-			<span className={s.price}>{item.price}₴</span>
 		</Link>
 	)
 }

@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
 	}
 })
 
-// get
+// get all
 router.get('/', async (req, res) => {
 	try {
 		const goods = await Good.find()
@@ -28,6 +28,16 @@ router.get('/:id', async (req, res) => {
 	try {
 		const good = await Good.findById(req.params.id)
 		res.status(200).json(good)
+	} catch (error) {
+		res.status(500).json({ message: 'Server error', error })
+	}
+})
+
+// get by category
+router.get('/category/:category', async (req, res) => {
+	try {
+		const goods = await Good.find({ category: req.params.category })
+		res.status(200).json(goods)
 	} catch (error) {
 		res.status(500).json({ message: 'Server error', error })
 	}

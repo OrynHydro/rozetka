@@ -13,20 +13,12 @@ const Layout = ({ children }) => {
 
 	return (
 		<div>
-			{pathname === '/' ? (
+			{pathname === '/' || pathname.includes('/item') ? (
 				<div>
 					<Header />
 					<div className='wrapper'>
-						<div className={s.flex}>
-							<CategorySidebar />
-							{children}
-						</div>
+						<div className={s.flex}>{children}</div>
 					</div>
-				</div>
-			) : pathname.includes('/item') ? (
-				<div>
-					<Header />
-					<div className='wrapper'>{children}</div>
 				</div>
 			) : (
 				<div>{children}</div>

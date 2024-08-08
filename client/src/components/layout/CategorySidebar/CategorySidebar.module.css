@@ -1,9 +1,10 @@
 .sidebar {
+	padding-top: 16px;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	width: 233px;
-	padding: 16px;
 	border-right: 1px solid #e9e9e9;
 	border-bottom: 1px solid #e9e9e9;
 }
@@ -11,6 +12,13 @@
 .item {
 	display: flex;
 	gap: 7.5px;
+	margin: 8px 16px 0;
+}
+
+.item:last-child {
+	margin: 8px 0 0;
+	padding: 0 16px 16px;
+	border-bottom: 1px solid #e9e9e9;
 }
 
 .title {
